@@ -1,0 +1,101 @@
+[gd_scene load_steps=15 format=3 uid="uid://6qftyq31oatv"]
+
+[ext_resource type="Script" path="res://Scripts/main_charater.gd" id="1_gu1ws"]
+[ext_resource type="Texture2D" uid="uid://b26o0mroikqr0" path="res://Rescources/Animation/Idel/Idel1.png" id="2_bgc5k"]
+[ext_resource type="Texture2D" uid="uid://dt4eyivethccs" path="res://Rescources/Animation/Idel/Idel2.png" id="3_wodce"]
+[ext_resource type="Texture2D" uid="uid://c5ljkumxuejy2" path="res://Rescources/Animation/Idel/Idel3.png" id="4_lyeud"]
+[ext_resource type="Texture2D" uid="uid://b0pgneb3umyqk" path="res://Rescources/Animation/Idel/Idel4.png" id="5_pqkvm"]
+[ext_resource type="Texture2D" uid="uid://bbgorvwqy1fxu" path="res://Rescources/Animation/Run/Run1.png" id="6_2ib0y"]
+[ext_resource type="Texture2D" uid="uid://btfutsqjovnuo" path="res://Rescources/Animation/Jump/Jump1.png" id="6_rl5sw"]
+[ext_resource type="Texture2D" uid="uid://b7gwntuga8sk6" path="res://Rescources/Animation/Run/Run2.png" id="7_hgddu"]
+[ext_resource type="Texture2D" uid="uid://cexstgc3xo67t" path="res://Rescources/Animation/Run/Run3.png" id="8_nsrpi"]
+[ext_resource type="Script" path="res://Sceans/timer.gd" id="10_8u11p"]
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_873j4"]
+load_path = "res://.godot/imported/Fall (32x32).png-ecbc03675b100dd3e6fe69003d7268fb.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipj2y"]
+atlas = SubResource("CompressedTexture2D_873j4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h3svu"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("2_bgc5k")
+}, {
+"duration": 1.0,
+"texture": ExtResource("3_wodce")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_lyeud")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_pqkvm")
+}],
+"loop": true,
+"name": &"Idel",
+"speed": 1.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_rl5sw")
+}],
+"loop": true,
+"name": &"Jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("6_2ib0y")
+}, {
+"duration": 1.0,
+"texture": ExtResource("7_hgddu")
+}, {
+"duration": 1.0,
+"texture": ExtResource("8_nsrpi")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 1.01
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipj2y")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_26pq3"]
+size = Vector2(18.3333, 43.3333)
+
+[node name="CharacterBody2D" type="CharacterBody2D"]
+scale = Vector2(3, 3)
+script = ExtResource("1_gu1ws")
+
+[node name="PlayerModel" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(64.5, 161.833)
+scale = Vector2(0.864583, 0.864583)
+sprite_frames = SubResource("SpriteFrames_h3svu")
+animation = &"Jumping"
+autoplay = "Idel"
+frame_progress = 0.516007
+speed_scale = 3.0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="."]
+position = Vector2(64.1667, 161)
+shape = SubResource("RectangleShape2D_26pq3")
+
+[node name="Camera2D" type="Camera2D" parent="."]
+position = Vector2(66, 124.333)
+position_smoothing_enabled = true
+
+[node name="Timer" type="Timer" parent="."]
+wait_time = 3.0
+one_shot = true
+script = ExtResource("10_8u11p")
+
+[connection signal="timeout" from="Timer" to="." method="_on_timer_timeout"]
