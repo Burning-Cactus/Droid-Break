@@ -1,0 +1,186 @@
+[gd_scene load_steps=19 format=3 uid="uid://botl4bs0n77rs"]
+
+[sub_resource type="GDScript" id="GDScript_q0snl"]
+script/source = "extends Node
+var shown = false
+# Called when the node enters the scene tree for the first time.
+func _ready() -> void:
+	$Area2D.body_entered.connect(PlayAnimation)
+
+func PlayAnimation(body: Node) -> void:
+	if (!shown):
+		$AnimationPlayer.play('Show')
+		shown = true
+
+# Called every frame. 'delta' is the elapsed time since the previous frame.
+func _process(delta: float) -> void:
+	pass
+"
+
+[sub_resource type="Animation" id="Animation_ni6br"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 0,
+"values": [0.0]
+}
+
+[sub_resource type="Animation" id="Animation_l8bhi"]
+resource_name = "Show"
+length = 4.0
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:visible_ratio")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 2, 3.93333),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 0,
+"values": [0.0, 0.5, 1.0]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_7svw2"]
+_data = {
+"RESET": SubResource("Animation_ni6br"),
+"Show": SubResource("Animation_l8bhi")
+}
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_58cfn"]
+size = Vector2(108.812, 68.5)
+
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_mjujh"]
+load_path = "res://.godot/imported/Idle (32x32).png-b6705713657c67ed2e60dcac5c083eea.ctex"
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_k452j"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_28wg1"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(32, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iek44"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(64, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_urpvy"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(96, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_5k22w"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(128, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_02dyn"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(160, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_yn26q"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(192, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_68e4q"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(224, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_c4pou"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(256, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_iaaiq"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(288, 0, 32, 32)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_rypt8"]
+atlas = SubResource("CompressedTexture2D_mjujh")
+region = Rect2(320, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_h1djr"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_k452j")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_28wg1")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iek44")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_urpvy")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_5k22w")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_02dyn")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_yn26q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_68e4q")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_c4pou")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_iaaiq")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_rypt8")
+}],
+"loop": true,
+"name": &"Idel",
+"speed": 15.0
+}]
+
+[node name="Glide" type="Node"]
+script = SubResource("GDScript_q0snl")
+
+[node name="Label" type="Label" parent="."]
+offset_left = 2046.0
+offset_top = -317.0
+offset_right = 2356.0
+offset_bottom = -164.0
+text = "Normally this jump would be impossable but with the help of  a glider its possable. 
+Be forwarned that you have to land ontop of the Jump pad landing on the side
+
+over here theses 1/8th platforms are were you are recomeneded to glide 
+
+How to glide:
+Move into any direction, then press the jump button twice"
+visible_characters = 0
+visible_ratio = 0.0
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="."]
+root_node = NodePath("../Label")
+libraries = {
+"": SubResource("AnimationLibrary_7svw2")
+}
+
+[node name="Area2D" type="Area2D" parent="."]
+position = Vector2(687, 370)
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="Area2D"]
+position = Vector2(1222, -519)
+shape = SubResource("RectangleShape2D_58cfn")
+
+[node name="Sprite2D" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+position = Vector2(2165, -134)
+scale = Vector2(2.40625, 2.59375)
+sprite_frames = SubResource("SpriteFrames_h1djr")
+animation = &"Idel"
+autoplay = "Idel"
+frame_progress = 0.561361

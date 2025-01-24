@@ -1,21 +1,77 @@
-[gd_scene load_steps=9 format=3 uid="uid://d2o4pnqbt5x7v"]
+[gd_scene load_steps=18 format=3 uid="uid://d2o4pnqbt5x7v"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qqsk6"]
 [ext_resource type="Script" path="res://health.gd" id="2_gh8cl"]
+[ext_resource type="Texture2D" uid="uid://b26o0mroikqr0" path="res://resources/Animation/Idel/Idel1.png" id="3_a6ja6"]
 [ext_resource type="Script" path="res://hurt_box.gd" id="3_i38on"]
+[ext_resource type="Texture2D" uid="uid://dt4eyivethccs" path="res://resources/Animation/Idel/Idel2.png" id="4_ksvac"]
+[ext_resource type="Texture2D" uid="uid://c5ljkumxuejy2" path="res://resources/Animation/Idel/Idel3.png" id="5_b0tmj"]
+[ext_resource type="Texture2D" uid="uid://b0pgneb3umyqk" path="res://resources/Animation/Idel/Idel4.png" id="6_d6av6"]
+[ext_resource type="Texture2D" uid="uid://btfutsqjovnuo" path="res://resources/Animation/Jump/Jump1.png" id="7_7iw8t"]
+[ext_resource type="Texture2D" uid="uid://bbgorvwqy1fxu" path="res://resources/Animation/Run/Run1.png" id="8_3ujfi"]
+[ext_resource type="Texture2D" uid="uid://b7gwntuga8sk6" path="res://resources/Animation/Run/Run2.png" id="9_ivrqm"]
+[ext_resource type="Texture2D" uid="uid://cexstgc3xo67t" path="res://resources/Animation/Run/Run3.png" id="10_785yl"]
 
 [sub_resource type="Resource" id="Resource_jqgt3"]
 script = ExtResource("2_gh8cl")
 max_health = 100
 health = 100
 
-[sub_resource type="Gradient" id="Gradient_gieqs"]
+[sub_resource type="CompressedTexture2D" id="CompressedTexture2D_873j4"]
 
-[sub_resource type="GradientTexture2D" id="GradientTexture2D_r8otw"]
-gradient = SubResource("Gradient_gieqs")
-width = 24
-height = 48
-fill_to = Vector2(1, 1)
+[sub_resource type="AtlasTexture" id="AtlasTexture_ipj2y"]
+atlas = SubResource("CompressedTexture2D_873j4")
+region = Rect2(0, 0, 32, 32)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_tguag"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("3_a6ja6")
+}, {
+"duration": 1.0,
+"texture": ExtResource("4_ksvac")
+}, {
+"duration": 1.0,
+"texture": ExtResource("5_b0tmj")
+}, {
+"duration": 1.0,
+"texture": ExtResource("6_d6av6")
+}],
+"loop": true,
+"name": &"Idel",
+"speed": 1.5
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("7_7iw8t")
+}],
+"loop": true,
+"name": &"Jumping",
+"speed": 5.0
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": ExtResource("8_3ujfi")
+}, {
+"duration": 1.0,
+"texture": ExtResource("9_ivrqm")
+}, {
+"duration": 1.0,
+"texture": ExtResource("10_785yl")
+}],
+"loop": true,
+"name": &"Running",
+"speed": 1.01
+}, {
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_ipj2y")
+}],
+"loop": true,
+"name": &"falling",
+"speed": 5.0
+}]
 
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_1obrr"]
 size = Vector2(24, 48)
@@ -29,8 +85,12 @@ collision_layer = 2
 script = ExtResource("1_qqsk6")
 stats = SubResource("Resource_jqgt3")
 
-[node name="PlaceholderSprite" type="Sprite2D" parent="."]
-texture = SubResource("GradientTexture2D_r8otw")
+[node name="PlaceholderSprite" type="AnimatedSprite2D" parent="."]
+texture_filter = 1
+sprite_frames = SubResource("SpriteFrames_tguag")
+animation = &"Jumping"
+autoplay = "Idel"
+speed_scale = 3.0
 
 [node name="CollisionShape2D" type="CollisionShape2D" parent="."]
 shape = SubResource("RectangleShape2D_1obrr")
