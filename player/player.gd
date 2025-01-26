@@ -6,8 +6,7 @@ const JUMP_VELOCITY: float = -450.0
 const MAX_AIR_JUMPS: int = 1
 var air_jumps: int = MAX_AIR_JUMPS
 
-# -1 is left, 1 is right
-var facing: int = 1
+var facing_right: bool = true
 
 signal health_changed(newValue: int)
 signal health_reached_zero()
@@ -21,9 +20,7 @@ func _ready() -> void:
 	
 	for state in $StateMachine.get_children():
 		assert(state is State, "ERROR: Non-state node included in state machine!")
-		
 		state.parent = self
-		
 		states[state.name.to_lower()] = state
 	
 	active_state = states.values()[0]
@@ -66,8 +63,8 @@ func set_state(name: String) -> void:
 
 func set_on_wall() -> void:
 #	state = ON_WALL
-	facing = -facing
-	print(facing)
+	facing_right = !facing_right
+	print(facing_right)
 
 func wall_jump() -> void:
 #	state = WALL_JUMPING
@@ -80,3 +77,10 @@ func can_jump() -> bool:
 		air_jumps -= 1
 		return true
 	return false
+
+func face_forward() -> void:
+	if velocity.x > 0:
+		facing_right = true
+	elif velocity.x < 0:
+		facing_right = false
+	$PlaceholderSprite.flip_h = !facing_right

@@ -13,12 +13,14 @@ func update(_delta: float) -> void:
 		parent.set_state("sliding")
 	elif !parent.is_on_floor():
 		parent.set_state("falling")
+	else:
+		parent.face_forward()
 
 # Called every physics frame
 func physics_update(_delta: float) -> void:
-	var direction := Input.get_axis("move_left", "move_right")
+	var direction: int = Input.get_axis("move_left", "move_right")
 	if direction:
-		parent.facing = direction
+		parent.facing_right = direction > 0
 		parent.velocity.x = direction * parent.SPEED
 	else:
 		parent.velocity.x = move_toward(parent.velocity.x, 0, parent.SPEED)

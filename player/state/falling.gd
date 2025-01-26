@@ -15,11 +15,11 @@ func physics_update(delta: float) -> void:
 	
 	parent.velocity += parent.get_gravity() * delta
 	
-	var direction := Input.get_axis("move_left", "move_right")
+	var direction: int = Input.get_axis("move_left", "move_right")
 	
 	# Acceleration and deceleration is slower in the air.
 	if direction:
-		parent.facing = direction
+		parent.facing_right = direction > 0
 		parent.velocity.x = move_toward(parent.velocity.x, direction * parent.SPEED, 20)
 	else:
 		parent.velocity.x = move_toward(parent.velocity.x, 0, 20)
