@@ -6,6 +6,10 @@ func start() -> void:
 
 # Called every frame
 func update(_delta: float) -> void:
+	if Input.is_action_just_pressed("attack"):
+		
+		return
+	
 	# Handle jump.
 	if Input.is_action_just_pressed("jump") && parent.can_jump():
 		parent.set_state("jumping")
@@ -13,8 +17,7 @@ func update(_delta: float) -> void:
 		parent.set_state("sliding")
 	elif !parent.is_on_floor():
 		parent.set_state("falling")
-	else:
-		parent.face_forward()
+	parent.face_forward()
 
 # Called every physics frame
 func physics_update(_delta: float) -> void:

@@ -1,8 +1,8 @@
 [gd_scene load_steps=19 format=3 uid="uid://d2o4pnqbt5x7v"]
 
 [ext_resource type="Script" path="res://player/player.gd" id="1_qqsk6"]
-[ext_resource type="Script" path="res://health.gd" id="2_gh8cl"]
-[ext_resource type="Script" path="res://hurt_box.gd" id="3_i38on"]
+[ext_resource type="Script" path="res://common/health.gd" id="2_gh8cl"]
+[ext_resource type="Script" path="res://common/hurt_box.gd" id="3_i38on"]
 [ext_resource type="Texture2D" uid="uid://byaaqlp5mbhfx" path="res://resources/player/Xander.png" id="3_o78pk"]
 [ext_resource type="Script" path="res://player/state/sliding.gd" id="4_dre56"]
 [ext_resource type="Script" path="res://player/state/ground.gd" id="4_fmrco"]

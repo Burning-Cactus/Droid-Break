@@ -40,7 +40,6 @@ func _process(delta: float) -> void:
 
 func _physics_process(delta: float) -> void:
 	active_state.physics_update(delta)
-				
 		# ON_WALL:
 		# 	if Input.is_action_just_pressed("jump"):
 		# 		state = JUMPING
